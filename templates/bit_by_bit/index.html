@@ -1,10 +1,61 @@
-<!--Use double curly braces to access context dictionary values passed from view function index-->
-<!--Use dot notation to access class fields-->
-{{ article1.title }}
-{{ article1.content }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Articles</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- We're not storing additional libraries locally yet -->
+  <!-- We're using globally available through CDN services libraries - Bootstrap and jQuery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
 
-{{ article2.title }}
-{{ article2.content }}
+<!-- Default Bootstrap container to render all the staff in -->
+<div class="container">
 
-{{ article3.title }}
-{{ article3.content }}
+  <div class="page-header">
+    <h1>Articles</h1>
+  </div>
+
+  <!-- Default Bootstrap agreement to use Row class -->
+  <div class="row">
+
+    <!-- Use left 9/12th of the screen space for article content -->
+    <div class="col-md-9">
+      <div class="tab-content">
+        <!-- Use id to link article content with appropriate title -->
+        <!-- First article is active by default -->
+        <div id="article1" class="tab-pane fade in active">
+          <h3>{{ article1.title }}</h3>
+          <p>{{ article1.content }}</p>
+        </div>
+        <div id="article2" class="tab-pane fade">
+          <h3>{{ article2.title }}</h3>
+          <p>{{ article2.content }}</p>
+        </div>
+        <div id="article3" class="tab-pane fade">
+          <h3>{{ article3.title }}</h3>
+          <p>{{ article3.content }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Use right 3/12th of the screen space for article titles -->
+    <div class="col-md-3">
+      <ul class="nav nav-pills nav-stacked">
+        <!-- Use href to link article title with appropriate content -->
+        <!-- First article is active by default -->
+        <li class="active"><a data-toggle="pill" href="#article1">{{ article1.title }}</a></li>
+        <li><a data-toggle="pill" href="#article2">{{ article2.title }}</a></li>
+        <li><a data-toggle="pill" href="#article3">{{ article3.title }}</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
+
