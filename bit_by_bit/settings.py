@@ -54,7 +54,10 @@ ROOT_URLCONF = 'bit_by_bit.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # Add directories Django processor will lookup for html files in
+        # BASE_DIR here is a root directory of our project
+        # join function creates valid directory path
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

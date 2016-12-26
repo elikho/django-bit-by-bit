@@ -16,6 +16,13 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+# From views.py file import the index name
+# Dot symbol forces to lookup in the current directory
+from .views import index
+
+
 urlpatterns = [
+    # Add empty url processing, forcing to call the index function
+    url(r'^$', index),
     url(r'^admin/', admin.site.urls),
 ]
