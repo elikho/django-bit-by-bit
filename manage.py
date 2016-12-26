@@ -3,6 +3,8 @@ import os
 import sys
 
 if __name__ == "__main__":
+    # Created automatically, specifying which file to use to config the application
+    # In our case this is bit_by_bit/bit_by_bit/settings.py
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bit_by_bit.settings")
     try:
         from django.core.management import execute_from_command_line

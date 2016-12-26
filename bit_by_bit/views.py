@@ -5,6 +5,8 @@
 # Import function to render given html page
 from django.shortcuts import render
 
+# Import datetime module to get current time
+from datetime import datetime
 
 # Create a class representing an article
 class Article:
@@ -50,7 +52,9 @@ def index(request):
     # In our case we pass three Article instanses to render it on the page
     context = {
         # Create a list of articles
-        'articles': [article1, article2, article3]
+        'articles': [article1, article2, article3],
+        # Get current time from standard now() function
+        'current_date': datetime.now(),
     }
 
     # 2nd parameter is a name of html template to send context dictionary to

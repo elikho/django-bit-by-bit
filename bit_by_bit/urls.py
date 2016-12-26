@@ -20,9 +20,15 @@ from django.contrib import admin
 # Dot symbol forces to lookup in the current directory
 from .views import index
 
+# Import values from settings.py file
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     # Add empty url processing, forcing to call the index function
     url(r'^$', index),
     url(r'^admin/', admin.site.urls),
-]
+# Point Django to the directories where static files to search for
+# Take the values from settings.py file
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

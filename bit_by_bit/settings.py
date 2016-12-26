@@ -49,6 +49,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Created automatically, specifying the file with url handlers
+# In our case this is bit_by_bit/bit_by_bit/urls.py
 ROOT_URLCONF = 'bit_by_bit.urls'
 
 TEMPLATES = [
@@ -121,3 +123,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Point Django to the directories where static files to search for
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
