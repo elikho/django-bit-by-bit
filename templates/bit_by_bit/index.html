@@ -12,33 +12,34 @@
 </head>
 <body>
 
-<!-- Default Bootstrap container to render all the staff in -->
-<div class="container">
+  <!-- Default Bootstrap container to render all the staff in -->
+  <div class="container">
 
-  <div class="page-header">
-    <h1>Articles</h1>
-  </div>
+    <div class="page-header">
+      <h1>Articles</h1>
+    </div>
 
-  <!-- Default Bootstrap agreement to use Row class -->
-  <div class="row">
+    <!-- Default Bootstrap agreement to use Row class -->
+    <div class="row">
 
-    <!-- Use left 9/12th of the screen space for article content -->
-    <div class="col-md-9">
-      <div class="tab-content">
-        <!-- Use id to link article content with appropriate title -->
-        <!-- First article is active by default -->
-        <div id="article1" class="tab-pane fade in active">
-          <h3>{{ article1.title }}</h3>
-          <p>{{ article1.content }}</p>
-        </div>
-        <div id="article2" class="tab-pane fade">
-          <h3>{{ article2.title }}</h3>
-          <p>{{ article2.content }}</p>
-        </div>
-        <div id="article3" class="tab-pane fade">
-          <h3>{{ article3.title }}</h3>
-          <p>{{ article3.content }}</p>
-        </div>
+      <!-- Use left 9/12th of the screen space for article content -->
+      <div class="col-md-9">
+        <div class="tab-content">
+          <!-- Use id to link article content with appropriate title -->
+          <!-- Cycle through the articles list with standard forloop -->
+          <!-- Use article identifier as div identifier -->
+          <!-- First article is active by default - add classes In and Active to the div if loop counter is 0 - first loop iteration -->
+          {% for article in articles %}
+            <div
+              id="{{ article.id }}"
+              class="tab-pane fade
+              {% if forloop.counter0 == 0 %}
+                in active
+              {% endif %}">
+              <h3>{{ article.title }}</h3>
+              <p>{{ article.content }}</p>
+            </div>
+          {% endfor %}
       </div>
     </div>
 
@@ -46,14 +47,19 @@
     <div class="col-md-3">
       <ul class="nav nav-pills nav-stacked">
         <!-- Use href to link article title with appropriate content -->
-        <!-- First article is active by default -->
-        <li class="active"><a data-toggle="pill" href="#article1">{{ article1.title }}</a></li>
-        <li><a data-toggle="pill" href="#article2">{{ article2.title }}</a></li>
-        <li><a data-toggle="pill" href="#article3">{{ article3.title }}</a></li>
-      </ul>
-    </div>
-
+        <!-- First article is active by default - add class Active if this is the first loop iteration otherwice add nothing -->
+        {% for article in articles %}
+          <li
+            {% if forloop.counter0 == 0 %}
+              class="active"
+            {% endif %}>
+            <a data-toggle="pill" href="#{{ article.id }}">{{ article.title }}</a>
+          </li>
+        {% endfor %}
+    </ul>
   </div>
+
+</div>
 </div>
 
 </body>

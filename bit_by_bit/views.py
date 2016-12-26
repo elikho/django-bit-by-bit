@@ -9,7 +9,9 @@ from django.shortcuts import render
 # Create a class representing an article
 class Article:
     # Constructor has been using to create a new instance of the class
-    def __init__(self, title, content):
+    def __init__(self, title, content, id):
+        # Add article identifier, we'll use it in our html template
+        self.id = id
         self.title = title
         self.content = content
 
@@ -20,6 +22,8 @@ def index(request):
 
     # Create three instances of Article class providing initial data
     article1 = Article(
+        # Set article identifier
+        id=1,
         title='Matryoshka doll',
         # You can use three quotes to create multiline strings
         content=''' A matryoshka doll (Russian: матрёшка; IPA: [mɐˈtrʲɵʂkə] ( listen), matrëška), also known as a Russian nesting doll, or Russian doll,[1] is a set of wooden dolls of decreasing size placed one inside another. The name "matryoshka" (матрёшка), literally "little matron", is a diminutive form of Russian female first name "Matryona" (Матрёна) or "Matriosha".[2]
@@ -28,11 +32,14 @@ def index(request):
         )
 
     article2 = Article(
+        # Make article id unique
+        id=2,
         title='Gusli',
         content=''' Gusli (Russian: гу́сли; IPA: [ˈɡuslʲɪ]) is the oldest Russian multi-string plucked instrument. Its exact history is unknown. It may have derived from a Byzantine form of the Greek kythare, which in turn derived from the ancient lyre. It has its relatives throughout the world: kantele in Finland, kannel in Estonia, kanklės, or kokle in Lithuania and Latvia. Furthermore, the kanun has been found in Arabic countries, and the autoharp, in the United States. It is also related to such ancient instruments as Chinese gu zheng, which has a thousand-year history, and its Japanese relative koto.'''
         )
 
     article3 = Article(
+        id=3,
         title='Kokoshnik',
         content=''' The kokoshnik (Russian: коко́шник; IPA: [kɐˈkoʂnʲɪk]) is a traditional Russian headdress worn by women and girls to accompany the sarafan, primarily worn in the northern regions of Russia in the 16th to 19th centuries.
                     Historically a kokoshnik is a headdress worn by married women, though maidens wore a headdress very similar to a kokoshnik, but open in the back, named a povyazka.[1] The word kokoshnik describes a great variety of headdresses worn throughout Russia, including the cylindrical hats of Veliky Novgorod, two-pointed nimbus kika of Vladimir, triangular kika of Kostroma, small pearl hats of Kargopol, and scarlet kokoshniks of Moscow.
@@ -42,9 +49,8 @@ def index(request):
     # Create a dictionary passed to html page
     # In our case we pass three Article instanses to render it on the page
     context = {
-        'article1': article1,
-        'article2': article2,
-        'article3': article3
+        # Create a list of articles
+        'articles': [article1, article2, article3]
     }
 
     # 2nd parameter is a name of html template to send context dictionary to
