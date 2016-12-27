@@ -1,3 +1,6 @@
+<!-- Allow Django template processor to find static files relying on settings.py config -->
+{% load static %}
+
 <!-- Base template contains all unmutable elements like html head block, menu bar, footer etc.
      and a space for mutable from page to page code -->
 <!DOCTYPE html>
@@ -7,13 +10,12 @@
   <title>BIT BY BIT | {{ title }}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- We're not storing additional libraries locally yet -->
-  <!-- We're using globally available through CDN services libraries - Bootstrap and jQuery -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- Use static keyword to access STATICFILES_DIRS value stored in settings.py file -->
+  <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap-3.3.7-dist/css/bootstrap.min.css' %}">
+  <script src="{% static 'assets/vendor/jquery-3.1.1.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
   <!-- Add link for navbar and footer styles -->
-  <link href="/static/assets/custom/sticky-footer-navbar.css" rel="stylesheet">
+  <link rel="stylesheet" href="/static/assets/custom/sticky-footer-navbar.css">
 </head>
 <body>
 
