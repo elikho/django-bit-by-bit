@@ -8,14 +8,8 @@ from django.shortcuts import render
 # Import datetime module to get current time
 from datetime import datetime
 
-# Create a class representing an article
-class Article:
-    # Constructor has been using to create a new instance of the class
-    def __init__(self, title, content, id):
-        # Add article identifier, we'll use it in our html template
-        self.id = id
-        self.title = title
-        self.content = content
+# In curren directory find models module and import Article name from there
+from .models import Article
 
 
 # Create a function to process accessing to the index page
@@ -45,6 +39,25 @@ def about(request):
 
 def news(request):
 
+    # Move populating dataset out to function
+    articles = get_articles()
+
+    # Create a dictionary passed to html page
+    # In our case we pass three Article instanses to render it on the page
+    context = {
+        # Create a list of articles
+        'articles': articles,
+        # Get current time from standard now() function
+        'current_date': datetime.now(),
+        'title': 'News',
+    }
+
+    return render(request, 'bit_by_bit/news.html', context)
+
+
+def get_articles():
+    result = []
+
     # Create three instances of Article class providing initial data
     article1 = Article(
         # Set article identifier
@@ -71,14 +84,8 @@ def news(request):
                     While in the past kokoshnik styles varied greatly, currently a kokoshnik is generally associated with a tall, nimbus or crest shaped headdress which is tied at the back of the head with long thick ribbons in a large bow. The crest can be embroidered with pearls and goldwork or simple applique, usually using plant and flower motifs. The forehead area is frequently decorated with pearl netting. While wearing a kokoshnik the woman usually wears her hair in a plait. It resembles the French hood worn in Tudor England, but without the black veil.'''
         )
 
-    # Create a dictionary passed to html page
-    # In our case we pass three Article instanses to render it on the page
-    context = {
-        # Create a list of articles
-        'articles': [article1, article2, article3],
-        # Get current time from standard now() function
-        'current_date': datetime.now(),
-        'title': 'News',
-    }
+    result.append(article1)
+    result.append(article2)
+    result.append(article3)
 
-    return render(request, 'bit_by_bit/news.html', context)
+    return result
