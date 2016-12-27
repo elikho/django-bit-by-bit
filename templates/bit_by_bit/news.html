@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <div class="page-header">
+    <h1>{{ title }}</h1>
+  </div>
+
+  <!-- Default Bootstrap agreement to use Row class -->
+  <div class="row">
+
+    <!-- Use left 9/12th of the screen space for article content -->
+    <div class="col-md-9">
+      <div class="tab-content">
+        <!-- Use id to link article content with appropriate title -->
+        <!-- Cycle through the articles list with standard forloop -->
+        <!-- Use article identifier as div identifier -->
+        <!-- First article is active by default - add classes In and Active to the div if loop counter is 0 - first loop iteration -->
+        {% for article in articles %}
+        <div
+          id="{{ article.id }}"
+          class="tab-pane fade
+          <!-- counter0 starts from 0 when simple counter starts from 1 -->
+          {% if forloop.counter0 == 0 %}
+            in active
+          {% endif %}">
+        <h3>{{ article.title }}</h3>
+        <p>{{ article.content }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Use right 3/12th of the screen space for article titles -->
+    <div class="col-md-3">
+      <ul class="nav nav-pills nav-stacked">
+        <!-- Use href to link article title with appropriate content -->
+        <!-- First article is active by default - add class Active if this is the first loop iteration otherwice add nothing -->
+        {% for article in articles %}
+          <li
+            {% if forloop.counter0 == 0 %}
+              class="active"
+            {% endif %}>
+            <a data-toggle="pill" href="#{{ article.id }}">{{ article.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+  </div>
+
+{% endblock %}

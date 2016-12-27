@@ -1,0 +1,62 @@
+<!-- Base template contains all unmutable elements like html head block, menu bar, footer etc.
+     and a space for mutable from page to page code -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Articles</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- We're not storing additional libraries locally yet -->
+  <!-- We're using globally available through CDN services libraries - Bootstrap and jQuery -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- Add link for navbar and footer styles -->
+  <link href="/static/assets/custom/sticky-footer-navbar.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- Bootsrap automatically hides menu items to dropdown list under this button on mobiles -->
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- Link to the index page -->
+        <a class="navbar-brand" href="/">BIT BY BIT</a>
+      </div>
+
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <!-- Another link to the index page, active by default -->
+          <!-- Use slash symbol for empty url -->
+          <li class="active"><a href="/">Home</a></li>
+          <!-- Use addresses from urls.py -->
+          <li><a href="/about/">About</a></li>
+          <li><a href="/news/">News</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Default Bootstrap container to render all the staff in -->
+  <div class="container">
+    {% block content %}
+      <!-- Leave space for page content - this is a mutable part of our template -->
+    {% endblock %}
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <!-- Show value came from index() as context dictionary item -->
+      <p class="text-muted">{{ current_date }}</p>
+    </div>
+  </footer>
+
+</body>
+</html>

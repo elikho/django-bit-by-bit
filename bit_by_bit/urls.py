@@ -18,7 +18,8 @@ from django.contrib import admin
 
 # From views.py file import the index name
 # Dot symbol forces to lookup in the current directory
-from .views import index
+# Do not forget to import view names for about and news pages
+from .views import index, about, news
 
 # Import values from settings.py file
 from django.conf import settings
@@ -28,6 +29,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     # Add empty url processing, forcing to call the index function
     url(r'^$', index),
+    # Use as_view function to override default template_name attribute
+    url(r'^about/$', about),
+    url(r'^news/$', news),
     url(r'^admin/', admin.site.urls),
 # Point Django to the directories where static files to search for
 # Take the values from settings.py file

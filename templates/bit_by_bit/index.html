@@ -1,102 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Articles</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- We're not storing additional libraries locally yet -->
-  <!-- We're using globally available through CDN services libraries - Bootstrap and jQuery -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <!-- Add link for navbar and footer styles -->
-  <link href="/static/assets/custom/sticky-footer-navbar.css" rel="stylesheet">
-</head>
-<body>
+<!-- Inherit from base template -->
+{% extends 'base.html' %}
 
-  <!-- Fixed navbar -->
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <!-- Bootsrap automatically hides menu items to dropdown list under this button on mobiles -->
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <!-- Link to the index page -->
-        <a class="navbar-brand" href="">BIT BY BIT</a>
-      </div>
+<!-- Replace block content from base template with new code -->
+{% block content %}
 
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <!-- Another link to the index page, active by default -->
-          <li class="active"><a href="">Home</a></li>
-          <li><a href="">About</a></li>
-          <li><a href="">News</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Default Bootstrap container to render all the staff in -->
-  <div class="container">
-
-    <div class="page-header">
-      <h1>Articles</h1>
-    </div>
-
-    <!-- Default Bootstrap agreement to use Row class -->
-    <div class="row">
-
-      <!-- Use left 9/12th of the screen space for article content -->
-      <div class="col-md-9">
-        <div class="tab-content">
-          <!-- Use id to link article content with appropriate title -->
-          <!-- Cycle through the articles list with standard forloop -->
-          <!-- Use article identifier as div identifier -->
-          <!-- First article is active by default - add classes In and Active to the div if loop counter is 0 - first loop iteration -->
-          {% for article in articles %}
-          <div
-            id="{{ article.id }}"
-            class="tab-pane fade
-            {% if forloop.counter0 == 0 %}
-              in active
-            {% endif %}">
-          <h3>{{ article.title }}</h3>
-          <p>{{ article.content }}</p>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-
-      <!-- Use right 3/12th of the screen space for article titles -->
-      <div class="col-md-3">
-        <ul class="nav nav-pills nav-stacked">
-          <!-- Use href to link article title with appropriate content -->
-          <!-- First article is active by default - add class Active if this is the first loop iteration otherwice add nothing -->
-          {% for article in articles %}
-            <li
-              {% if forloop.counter0 == 0 %}
-                class="active"
-              {% endif %}>
-              <a data-toggle="pill" href="#{{ article.id }}">{{ article.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-
-    </div>
+  <div class="page-header">
+    <!-- Access given context dictionary -->
+    <h1>{{ title }}</h1>
   </div>
 
-  <footer class="footer">
-    <div class="container">
-      <!-- Show value came from index() as context dictionary item -->
-      <p class="text-muted">{{ current_date }}</p>
-    </div>
-  </footer>
-
-</body>
-</html>
-
+{% endblock %}

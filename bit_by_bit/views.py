@@ -22,6 +22,29 @@ class Article:
 # request here is an object came with a client's request
 def index(request):
 
+    context = {
+        # Get current time from standard now() function
+        'current_date': datetime.now(),
+        # Add page title to show on html template
+        'title': 'Home',
+    }
+
+    # 2nd parameter is a name of html template to send context dictionary to
+    return render(request, 'bit_by_bit/index.html', context)
+
+
+def about(request):
+
+    context = {
+        'current_date': datetime.now(),
+        'title': 'About',
+    }
+
+    return render(request, 'bit_by_bit/about.html', context)
+
+
+def news(request):
+
     # Create three instances of Article class providing initial data
     article1 = Article(
         # Set article identifier
@@ -55,7 +78,7 @@ def index(request):
         'articles': [article1, article2, article3],
         # Get current time from standard now() function
         'current_date': datetime.now(),
+        'title': 'News',
     }
 
-    # 2nd parameter is a name of html template to send context dictionary to
-    return render(request, 'bit_by_bit/index.html', context)
+    return render(request, 'bit_by_bit/news.html', context)
