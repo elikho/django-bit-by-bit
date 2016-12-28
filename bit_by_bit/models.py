@@ -3,16 +3,12 @@ from django.db import models
 
 
 # Create a class representing an article
-class Article:
+# To use real database you have to inherit your class from models.Model
+class Article(models.Model):
     # Use statically typed fields now
     # Set primary_key to True to ensure all articles have different identifiers
-    id = models.IntegerField(primary_key=True)
+    # Django adds primary key automatically, so we don't need to set up id manually
     title = models.CharField(max_length=32)
     content = models.CharField(max_length=2048)
 
-    # Constructor has been using to create a new instance of the class
-    def __init__(self, title, content, id):
-        # Add article identifier, we'll use it in our html template
-        self.id = id
-        self.title = title
-        self.content = content
+    # We don't need custom cunstructor anymore, it's built it by default
